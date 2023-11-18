@@ -4,6 +4,7 @@ import {ApolloDriver} from "@nestjs/apollo";
 import {SurveyResolver} from "./survey.resolver";
 import {Survey} from "./entities/survet.entity";
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {SurveyService} from "./survey.service";
 
 
 @Module({
@@ -14,6 +15,6 @@ import {TypeOrmModule} from "@nestjs/typeorm";
             driver: ApolloDriver,
         }),
     ],
-    providers:[SurveyResolver,Survey],
+    providers:[SurveyResolver,Survey,SurveyService],
 })
 export class SurveyModule {}
