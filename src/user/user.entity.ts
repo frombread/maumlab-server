@@ -3,7 +3,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {Answer} from "../answer/answer.entity";
 
 @ObjectType()
-@Entity()
+@Entity({ schema: 'mindDB' })
 export class User {
     @Field(() => ID)
     @PrimaryGeneratedColumn()

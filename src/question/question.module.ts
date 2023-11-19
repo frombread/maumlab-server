@@ -1,17 +1,12 @@
 import {Module} from "@nestjs/common";
-import {GraphQLModule} from "@nestjs/graphql";
-import {ApolloDriver} from "@nestjs/apollo";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Question} from "./question.entity";
+import { QuestionResolver } from './question.resolver';
 
 @Module({
     imports:[
         TypeOrmModule.forFeature([Question]),
-        GraphQLModule.forRoot({
-            autoSchemaFile:true,
-            driver: ApolloDriver,
-        }),
     ],
-    providers:[Question],
+    providers:[Question, QuestionResolver],
 })
 export class QuestionModule {}

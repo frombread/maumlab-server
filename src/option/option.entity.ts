@@ -6,7 +6,7 @@ import {Answer} from "../answer/answer.entity";
 
 
 @ObjectType()
-@Entity()
+@Entity({ schema: 'mindDB' })
 export class Option {
     @Field(() => ID)
     @PrimaryGeneratedColumn()

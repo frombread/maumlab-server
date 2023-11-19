@@ -3,17 +3,14 @@ import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloDriver} from "@nestjs/apollo";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "./user.entity";
+import { UserResolver } from './user.resolver';
 
 
 
 @Module({
     imports:[
         TypeOrmModule.forFeature([User]),
-        GraphQLModule.forRoot({
-            autoSchemaFile:true,
-            driver: ApolloDriver,
-        }),
     ],
-    providers:[],
+    providers:[UserResolver,User],
 })
 export class UserModule {}

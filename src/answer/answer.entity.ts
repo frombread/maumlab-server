@@ -8,7 +8,7 @@ import {User} from "../user/user.entity";
 
 
 @ObjectType()
-@Entity()
+@Entity({ schema: 'mindDB' })
 export class Answer {
     @Field(() => ID)
     @PrimaryGeneratedColumn()
