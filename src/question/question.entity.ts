@@ -1,5 +1,5 @@
 
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, JoinTable} from 'typeorm';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {Survey} from "../survey/survey.entity";
 import {Option} from "../option/option.entity";
