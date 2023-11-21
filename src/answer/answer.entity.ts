@@ -13,9 +13,6 @@ export class Answer {
     @Field(() => ID)
     @PrimaryGeneratedColumn()
     id: number;
-    // @Field()
-    // @Column()
-    // created_at : Date
 
     @Field(() => User)
     @ManyToOne(() => User, user => user.answers, { nullable: false })

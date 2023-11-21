@@ -4,6 +4,7 @@ import {ApolloDriver} from "@nestjs/apollo";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Answer} from "./answer.entity";
 import { AnswerResolver } from './answer.resolver';
+import {AnswerService} from "./answer.service";
 
 
 
@@ -12,6 +13,6 @@ import { AnswerResolver } from './answer.resolver';
         TypeOrmModule.forFeature([Answer]),
 
     ],
-    providers:[Answer, AnswerResolver],
+    providers:[Answer, AnswerResolver,AnswerService],
 })
 export class AnswerModule {}

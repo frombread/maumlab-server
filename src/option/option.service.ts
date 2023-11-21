@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
 import {Option} from './option.entity';
-import {UpdateOptionInput} from "./option.dto";
+import {CreateOptionInput, UpdateOptionInput} from "./option.dto";
 import {Question} from "../question/question.entity";
 
 
@@ -13,7 +13,8 @@ export class OptionService {
         private readonly optionRepository: Repository<Option>,
     ) {}
 
-    async createOption(content: string, score: number, question: Question): Promise<Option> {
+    async createOption(createOptionInput: CreateOptionInput,question:Question): Promise<Option> {
+        const {content,score } =createOptionInput;
         const option = this.optionRepository.create({ content, score, question });
         return this.optionRepository.save(option);
     }
@@ -26,10 +27,10 @@ export class OptionService {
         return await this.optionRepository.findOne({where: {id}});
     }
 
-    async updateOption(id: number, content: string, score: number, question: Question): Promise<Option> {
+    async updateOption(id: number,updateOptionInput:UpdateOptionInput ,question: Question): Promise<Option> {
         const option = await this.optionRepository.findOne({where : {id}});
-        option.content = content;
-        option.score = score;
+        option.content = updateOptionInput.content;
+        option.score = updateOptionInput.score;
         option.question =question;
         return this.optionRepository.save(option);
     }

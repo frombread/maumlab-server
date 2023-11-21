@@ -1,4 +1,4 @@
-import {Args, Mutation, Query, Resolver} from "@nestjs/graphql";
+import {Args, Int, Mutation, Query, Resolver} from "@nestjs/graphql";
 import {Survey} from "./survey.entity";
 import {CreateSurveyInput, UpdateSurveyInput} from "./survey.dto";
 import {SurveyService} from "./survey.service";
@@ -31,5 +31,14 @@ export class SurveyResolver{
     async deleteSurvey(@Args('id') id: number): Promise<boolean> {
         await this.surveyService.remove(id);
         return true;
+    }
+
+    // 질문과 설문지 관계 설정
+    @Mutation(() => Survey)
+    async addQuestionToSurvey(
+        @Args('surveyId', { type: () => Int }) surveyId: number,
+        @Args('questionId', { type: () => Int }) questionId: number,
+    ): Promise<Survey> {
+        return this.surveyService.addQuestionToSurvey(surveyId, questionId);
     }
 }

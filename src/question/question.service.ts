@@ -20,7 +20,7 @@ export class QuestionService {
     }
 
     async findOne(id: number): Promise<Question> {
-        const question = await this.questionRepository.findOne({ where: { id }, relations: ['options'] });
+        const question = await this.questionRepository.findOne({ where: { id }});
         if (!question) {
             throw new NotFoundException(`Question with ID ${id} not found`);
         }

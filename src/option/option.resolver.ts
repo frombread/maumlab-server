@@ -1,4 +1,4 @@
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {Args, ID, Int, Mutation, Query, Resolver} from '@nestjs/graphql';
 import { Option } from './option.entity';
 import { OptionService } from './option.service';  // OptionService import 추가
 import { QuestionService } from '../question/question.service';
@@ -17,21 +17,25 @@ export class OptionResolver {
         @Args('createOptionInput') createOptionInput: CreateOptionInput,
     ): Promise<Option> {
         const question = await this.questionService.findOne(createOptionInput.questionId);
-        return this.optionService.createOption(createOptionInput.content, createOptionInput.score, question);
+        return this.optionService.createOption(createOptionInput,question);
     }
 
     @Query(()=>Option)
-    async findOneOption(@Args('id')id:number){
+    async Option(@Args('id',{ type: () => Int })id:number){
         return this.optionService.findOne(id);
     }
 
     @Query(()=>[Option])
-    async findAllOption(){
+    async Options(){
         return this.optionService.findAll();
     }
     @Mutation(()=>Option)
-    async updateOption(@Args('id')id:number, updateOptionInput:UpdateOptionInput ){
-
-
+    async updateOption(@Args('id',{ type: () => Int })id:number, @Args('updateOptionInput')updateOptionInput:UpdateOptionInput ){
+        const question = await this.questionService.findOne(updateOptionInput.questionId);
+        return this.optionService.updateOption(id,updateOptionInput,question);
+    }
+    @Mutation(()=>Boolean)
+    async deleteOption(@Args('id',{ type: () => Int })id:number){
+        return this.optionService.deleteOption(id);
     }
 }

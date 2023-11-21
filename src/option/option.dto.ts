@@ -19,4 +19,7 @@ export class UpdateOptionInput {
 
     @Field({ nullable: true })
     score?: number;
+
+    @Field(() => ID)
+    questionId: number;
 }

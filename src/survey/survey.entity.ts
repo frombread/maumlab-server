@@ -1,4 +1,3 @@
-// 엔터티 클래스에서 GraphQL 타입 정의
 import {ObjectType, Field, ID} from "@nestjs/graphql";
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany} from "typeorm";
 import {Question} from "../question/question.entity";
