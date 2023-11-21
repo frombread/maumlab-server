@@ -17,7 +17,7 @@ export class OptionResolver {
         @Args('createOptionInput') createOptionInput: CreateOptionInput,
     ): Promise<Option> {
         const question = await this.questionService.findOne(createOptionInput.questionId);
-        return this.optionService.createOption(createOptionInput,question);
+        return this.optionService.create(createOptionInput,question);
     }
 
     @Query(()=>Option)
@@ -32,10 +32,10 @@ export class OptionResolver {
     @Mutation(()=>Option)
     async updateOption(@Args('id',{ type: () => Int })id:number, @Args('updateOptionInput')updateOptionInput:UpdateOptionInput ){
         const question = await this.questionService.findOne(updateOptionInput.questionId);
-        return this.optionService.updateOption(id,updateOptionInput,question);
+        return this.optionService.update(id,updateOptionInput,question);
     }
     @Mutation(()=>Boolean)
     async deleteOption(@Args('id',{ type: () => Int })id:number){
-        return this.optionService.deleteOption(id);
+        return this.optionService.remove(id);
     }
 }

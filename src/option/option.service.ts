@@ -13,7 +13,7 @@ export class OptionService {
         private readonly optionRepository: Repository<Option>,
     ) {}
 
-    async createOption(createOptionInput: CreateOptionInput,question:Question): Promise<Option> {
+    async create(createOptionInput: CreateOptionInput,question:Question): Promise<Option> {
         const {content,score } =createOptionInput;
         const option = this.optionRepository.create({ content, score, question });
         return this.optionRepository.save(option);
@@ -27,7 +27,7 @@ export class OptionService {
         return await this.optionRepository.findOne({where: {id}});
     }
 
-    async updateOption(id: number,updateOptionInput:UpdateOptionInput ,question: Question): Promise<Option> {
+    async update(id: number,updateOptionInput:UpdateOptionInput ,question: Question): Promise<Option> {
         const option = await this.optionRepository.findOne({where : {id}});
         option.content = updateOptionInput.content;
         option.score = updateOptionInput.score;
@@ -35,8 +35,7 @@ export class OptionService {
         return this.optionRepository.save(option);
     }
 
-    async deleteOption(id: number): Promise<void> {
-        const option = await this.optionRepository.findOne({where : {id}});
-        await this.optionRepository.remove(option);
+    async remove(id: number): Promise<void> {
+        await this.optionRepository.delete(id);
     }
 }
