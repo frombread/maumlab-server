@@ -22,6 +22,7 @@ cd maumlab-server
 npm install
 
 npm run start
-
-localhost:4000
+```
+```
+http://localhost:4000 으로 접속
 ```
